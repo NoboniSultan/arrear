@@ -1,0 +1,28 @@
+.bar {
+  position: fixed;
+  left: var(--sidebar-width);
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
+.reasonSelect {
+  padding: 9px 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: 13px;
+  min-width: 220px;
+}
+
+.note {
+  margin-left: auto;
+  font-size: 10px;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}

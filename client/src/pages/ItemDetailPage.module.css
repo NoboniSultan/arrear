@@ -1,0 +1,98 @@
+.page {
+  padding: 32px;
+  padding-bottom: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.headerLeft {
+  min-width: 0;
+}
+
+.badgeRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  margin-bottom: 14px;
+}
+
+.programBadge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.headerLeft h1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+  max-width: 60ch;
+}
+
+.metaRow {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.headerRight {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.headerRight .mono-label {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+}
+
+.value {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 6px 0;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.mainColumn,
+.sideColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.navArrow {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: 14px;
+}
+
+.navArrow:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

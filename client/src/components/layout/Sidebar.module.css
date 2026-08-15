@@ -1,0 +1,139 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  background: var(--color-sidebar);
+  color: var(--color-text-inverse);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.brand {
+  padding: 24px 20px 20px;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+}
+
+.org {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--color-text-muted-inverse);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  border-top: 1px solid #232323;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  margin: 1px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #a8a8a8;
+  border-left: 3px solid transparent;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.navItem:hover {
+  color: var(--color-text-inverse);
+  background: var(--color-sidebar-hover);
+}
+
+.active {
+  color: var(--color-text-inverse);
+  background: var(--color-sidebar-hover);
+  border-left-color: var(--color-accent-green);
+}
+
+.savedViews {
+  padding: 20px 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.savedViewsLabel {
+  font-size: 10px;
+  color: #5a5a5a;
+  margin-bottom: 8px;
+}
+
+.savedView {
+  padding: 7px 0 7px 12px;
+  font-size: 13px;
+  color: #a8a8a8;
+  border-left: 1px solid #2c2c2c;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.savedView:hover {
+  color: var(--color-text-inverse);
+}
+
+.activeView {
+  color: var(--color-text-inverse);
+  font-weight: 500;
+  border-left: 1px solid var(--color-text-inverse);
+}
+
+.footer {
+  margin-top: auto;
+  border-top: 1px solid #232323;
+  padding: 16px 20px 20px;
+}
+
+.syncStatus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.syncDot {
+  width: 6px;
+  height: 6px;
+  background: #5a5a5a;
+}
+
+.syncStatus .mono-label {
+  font-size: 10px;
+  color: #7a7a7a;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  background: #3a3a3a;
+  flex-shrink: 0;
+}
+
+.userName {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.userRole {
+  font-size: 10px;
+  color: #7a7a7a;
+  margin-top: 2px;
+}

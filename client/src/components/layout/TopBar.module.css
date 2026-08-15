@@ -1,0 +1,41 @@
+.topBar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  height: var(--topbar-height);
+  padding: 0 32px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.breadcrumb {
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.part {
+  color: var(--color-text-secondary);
+}
+
+.current {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.separator {
+  margin: 0 8px;
+  color: var(--color-border);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}

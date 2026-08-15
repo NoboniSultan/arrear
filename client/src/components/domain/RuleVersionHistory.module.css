@@ -1,0 +1,40 @@
+.feed {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.entry {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.entry:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  margin-bottom: 6px;
+}
+
+.meta .mono-label:first-child {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.description {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.empty {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}

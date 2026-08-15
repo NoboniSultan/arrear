@@ -1,0 +1,81 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.header .mono-label:last-child {
+  color: var(--color-text-secondary);
+}
+
+.thread {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.note {
+  padding-left: 14px;
+  border-left: 2px solid var(--color-border);
+}
+
+.noteHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.author {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.timestamp {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+}
+
+.body {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.empty {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.composer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.avatar {
+  width: 26px;
+  height: 26px;
+  background: var(--color-sidebar);
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.input:focus {
+  border-color: var(--color-text-primary);
+}
+
+.error {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #b3261e;
+}

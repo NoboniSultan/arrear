@@ -1,0 +1,24 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px 0;
+  margin-bottom: 20px;
+  font-size: 11px;
+}
+
+.header .mono-label:last-child {
+  color: var(--color-text-secondary);
+}
+
+.criterion {
+  display: block;
+  max-width: 32ch;
+  font-weight: 500;
+}
+
+.source {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-accent-green);
+}

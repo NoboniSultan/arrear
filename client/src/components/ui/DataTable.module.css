@@ -1,0 +1,57 @@
+.wrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+}
+
+.th {
+  padding: 12px 20px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  text-align: left;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortArrow {
+  color: var(--color-text-primary);
+  margin: 0 4px;
+}
+
+.row {
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color var(--transition-fast);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  background: var(--color-bg);
+}
+
+.td {
+  padding: 16px 20px;
+  vertical-align: middle;
+}
+
+.td.alignRight {
+  text-align: right;
+}

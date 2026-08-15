@@ -1,0 +1,62 @@
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field .mono-label {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+}
+
+.field input,
+.field textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.field input:disabled,
+.field textarea:disabled {
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  resize: none;
+}
+
+.sqlTextarea {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.caption {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.error {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #b3261e;
+}
+
+.previewSection {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}

@@ -1,0 +1,22 @@
+.criteria {
+  display: block;
+  max-width: 56ch;
+}
+
+.value {
+  font-weight: 600;
+}
+
+.chevron {
+  color: var(--color-text-secondary);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.unassigned {
+  color: var(--color-text-secondary);
+}
+
+.selectedRow {
+  border-left: 3px solid var(--color-text-primary);
+}

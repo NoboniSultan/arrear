@@ -1,0 +1,33 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.new {
+  background: var(--color-badge-new-bg);
+  color: var(--color-badge-new-text);
+}
+
+.reviewed {
+  background: var(--color-badge-reviewed-bg);
+  border-color: var(--color-badge-reviewed-border);
+  color: var(--color-badge-reviewed-text);
+}
+
+.submitted {
+  background: var(--color-badge-submitted-bg);
+  color: var(--color-badge-submitted-text);
+}
+
+.rejected {
+  background: var(--color-badge-rejected-bg);
+  color: var(--color-badge-rejected-text);
+}

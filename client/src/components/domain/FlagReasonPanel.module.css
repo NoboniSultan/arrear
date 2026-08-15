@@ -1,0 +1,32 @@
+.narrative {
+  margin: 18px 0 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 68ch;
+}
+
+.sources {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 24px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 11px;
+}
+
+.sources > .mono-label {
+  color: var(--color-text-secondary);
+}
+
+.source {
+  font-family: var(--font-mono);
+  color: var(--color-accent-green);
+  cursor: default;
+}
+
+.ruleSet {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}

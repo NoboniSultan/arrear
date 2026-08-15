@@ -1,0 +1,63 @@
+.code {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.fullName {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.activeBadge,
+.pausedBadge {
+  display: inline-flex;
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.activeBadge {
+  background: var(--color-badge-new-bg);
+  color: var(--color-badge-new-text);
+}
+
+.pausedBadge {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.changeNote {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.recovered {
+  font-weight: 600;
+}
+
+.actionLink {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-accent-green);
+}
+
+.actionLink:hover {
+  color: var(--color-accent-green-hover);
+}
+
+.pausedRow {
+  color: var(--color-text-secondary);
+}
+
+.pausedRow .code,
+.pausedRow .fullName {
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,27 @@
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.label {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.value {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,12 @@
+.env
+node_modules/
+dist/
+build/
+
+# Any local data dumps/exports (e.g. Postgres dumps, Clarity extracts)
+/data/
+*.dump
+*.sql.gz
+
+*.log
+.DS_Store
