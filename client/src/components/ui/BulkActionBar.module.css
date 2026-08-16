@@ -13,6 +13,15 @@
   border: 1px solid var(--color-sidebar);
 }
 
+/* Sidebar is off-canvas below this width, so it no longer reserves space. */
+@media (max-width: 1024px) {
+  .bar {
+    left: 0;
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+}
+
 .summary {
   display: flex;
   align-items: center;

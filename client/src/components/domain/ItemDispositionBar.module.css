@@ -12,6 +12,27 @@
   border-top: 1px solid var(--color-border);
 }
 
+/* Sidebar is off-canvas below this width, so it no longer reserves space.
+   Buttons wrap rather than overflow or shrink illegibly. */
+@media (max-width: 1024px) {
+  .bar {
+    left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .bar {
+    flex-wrap: wrap;
+    row-gap: 10px;
+    padding: 12px 16px;
+  }
+
+  .note {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
 .reasonSelect {
   padding: 9px 12px;
   border: 1px solid var(--color-border);

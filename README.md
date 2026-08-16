@@ -142,8 +142,9 @@ so no CORS setup is needed.
 
 ## Deployment
 
-**Live demo:** not deployed yet — this line will be updated with the real
-`.pages.dev` URL once we've gone through the steps below.
+**Live demo:** https://arrear.sultannoboni.workers.dev (frontend) — talks to
+the backend at https://arrear-backend-i4kz.onrender.com. Free tier: the
+backend may take up to ~1 minute to respond after being idle.
 
 For hosting this for internal/demo viewing (free-tier only — Cloudflare
 Pages + Render + Neon), see [DEPLOY.md](DEPLOY.md). **Read its "Demo

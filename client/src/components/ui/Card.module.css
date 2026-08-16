@@ -1,6 +1,13 @@
 .card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
+  /* Flex/grid items default to min-width: auto (won't shrink below their
+     content's intrinsic size) — without this, a Card containing a wide
+     table (which relies on its own overflow-x: auto to scroll internally)
+     would instead force its whole flex/grid row wider than the viewport,
+     escaping the table's own scroll container. Only matters when space is
+     constrained, so this has no effect at desktop widths. */
+  min-width: 0;
 }
 
 .padded {

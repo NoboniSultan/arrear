@@ -22,6 +22,8 @@
 .badgeRow {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  row-gap: 8px;
   gap: 10px;
   font-size: 11px;
   color: var(--color-text-secondary);
@@ -82,6 +84,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-width: 0;
 }
 
 .navArrow {
@@ -95,4 +98,26 @@
 .navArrow:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 20px;
+    padding-bottom: 100px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .headerRight {
+    text-align: left;
+  }
 }

@@ -1,8 +1,12 @@
-.layout {
-  min-width: 1280px;
-}
-
 .content {
   margin-left: var(--sidebar-width);
   min-height: 100vh;
+}
+
+/* Below this width the sidebar is off-canvas (see Sidebar.module.css), so
+   it no longer reserves space in the layout. */
+@media (max-width: 1024px) {
+  .content {
+    margin-left: 0;
+  }
 }

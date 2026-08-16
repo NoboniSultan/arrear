@@ -12,6 +12,39 @@
   border-bottom: 1px solid var(--color-border);
 }
 
+.left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.hamburger {
+  display: none;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  font-size: 14px;
+  transition: border-color var(--transition-fast);
+}
+
+.hamburger:hover {
+  border-color: var(--color-text-primary);
+}
+
+/* Only shown once the sidebar itself goes off-canvas (see
+   Sidebar.module.css) — above that width it would just be a dead control,
+   which is why the desktop TopBar looks exactly as it did before. */
+@media (max-width: 1024px) {
+  .hamburger {
+    display: flex;
+  }
+}
+
 .breadcrumb {
   font-size: 11px;
   display: flex;
@@ -38,4 +71,19 @@
   align-items: center;
   gap: 12px;
   flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .topBar {
+    height: auto;
+    min-height: var(--topbar-height);
+    padding: 10px 16px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+
+  .right {
+    width: 100%;
+    flex-wrap: wrap;
+  }
 }
