@@ -160,8 +160,8 @@ admin script) rather than building a full self-service flow now.
 
 ## Status
 
-Early-stage project built in collaboration between **[your name]** and
-**[dad's name]**. Currently uses synthetic data only — no real patient data
+Early-stage project built in collaboration between **Sultan Bashar** and
+**Noboni Sultan**. Currently uses synthetic data only — no real patient data
 or live Epic connection yet.
 
 ## Data policy
