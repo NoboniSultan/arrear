@@ -1,0 +1,16 @@
+{
+  // Config for deploying the built frontend as static assets on Cloudflare
+  // Workers — this is the current recommended path for a Vite SPA (see
+  // DEPLOY.md Part 3). "compatibility_date" just pins which Workers runtime
+  // behaviors apply; bump it occasionally, it doesn't need to track "today".
+  "name": "arrear",
+  "compatibility_date": "2026-08-16",
+  "assets": {
+    "directory": "./dist/",
+    // Without this, a direct visit or refresh on a client-side route like
+    // /flagged-items/4 would 404 (no matching static file exists for it).
+    // This tells Workers to fall back to index.html so React Router can
+    // handle the route client-side instead.
+    "not_found_handling": "single-page-application"
+  }
+}
