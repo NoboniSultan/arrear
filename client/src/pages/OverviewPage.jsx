@@ -9,11 +9,12 @@ import { RecoveredByProgramList } from '../components/domain/RecoveredByProgramL
 import { FlaggedItemsTable } from '../components/domain/FlaggedItemsTable';
 import { useSummary } from '../hooks/useSummary';
 import { useFlaggedItems } from '../hooks/useFlaggedItems';
-import { CURRENT_USER } from '../constants';
+import { useAuth } from '../context/AuthContext';
 import { formatCurrency, formatNumber, formatPercent, formatDateLong } from '../utils/formatters';
 import styles from './OverviewPage.module.css';
 
 export function OverviewPage() {
+  const { user } = useAuth();
   const [scope, setScope] = useState('oversight');
   const { summary, loading } = useSummary();
   const { items: oldestFlags } = useFlaggedItems({
@@ -21,7 +22,7 @@ export function OverviewPage() {
     sort: 'created_at',
     order: 'asc',
     pageSize: 5,
-    assignee: scope === 'mine' ? CURRENT_USER.name : undefined,
+    assignee: scope === 'mine' ? user?.full_name : undefined,
   });
 
   if (loading || !summary) {

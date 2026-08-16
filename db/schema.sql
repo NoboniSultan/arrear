@@ -5,6 +5,31 @@
 -- which will eventually be queried on a schedule to populate flagged_items
 -- instead of the synthetic data in db/seed.js.
 
+-- Internal team accounts only. There is no public registration endpoint —
+-- rows here are created exclusively via db/createUser.js. Never seeded by
+-- db/seed.js, so reseeding synthetic app data never touches real accounts.
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    email TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    full_name TEXT NOT NULL,
+    role TEXT NOT NULL DEFAULT 'analyst' CHECK (role IN ('owner', 'analyst')),
+    is_active BOOLEAN NOT NULL DEFAULT true,
+    last_login_at TIMESTAMP,
+    created_at TIMESTAMP NOT NULL DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS login_attempts (
+    id SERIAL PRIMARY KEY,
+    email TEXT NOT NULL,
+    success BOOLEAN NOT NULL,
+    ip_address TEXT,
+    attempted_at TIMESTAMP NOT NULL DEFAULT now()
+);
+
+-- connect-pg-simple auto-creates its own "session" table in this same
+-- database on first run (see server/config/session.js, createTableIfMissing).
+
 CREATE TABLE IF NOT EXISTS programs (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,                 -- short code, e.g. "MIPS", "HCC" (used for filtering)
@@ -194,3 +219,4 @@ CREATE INDEX IF NOT EXISTS idx_rules_program_id ON rules(program_id);
 CREATE INDEX IF NOT EXISTS idx_rule_versions_rule_id ON rule_versions(rule_id);
 CREATE INDEX IF NOT EXISTS idx_rule_reviews_rule_id ON rule_reviews(rule_id);
 CREATE INDEX IF NOT EXISTS idx_recovery_summary_program_id ON recovery_summary(program_id);
+CREATE INDEX IF NOT EXISTS idx_login_attempts_email_attempted_at ON login_attempts(email, attempted_at);

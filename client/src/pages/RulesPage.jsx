@@ -6,7 +6,6 @@ import { DataTable } from '../components/ui/DataTable';
 import { usePrograms } from '../hooks/usePrograms';
 import { useRules } from '../hooks/useRules';
 import { createRule } from '../services/api';
-import { CURRENT_USER } from '../constants';
 import { formatDateLong } from '../utils/formatters';
 import styles from './RulesPage.module.css';
 
@@ -26,7 +25,6 @@ export function RulesPage() {
       name: 'New rule',
       description: '',
       sqlQuery: '-- Write a SELECT-only detection query\nSELECT * FROM flagged_items LIMIT 10',
-      createdBy: CURRENT_USER.name,
     });
     navigate(`/programs/${programId}/rules/${rule.id}`);
   }

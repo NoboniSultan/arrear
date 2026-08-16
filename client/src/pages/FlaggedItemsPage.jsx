@@ -10,7 +10,7 @@ import { FilterBar } from '../components/domain/FilterBar';
 import { useFlaggedItems } from '../hooks/useFlaggedItems';
 import { usePrograms } from '../hooks/usePrograms';
 import { reviewFlaggedItem } from '../services/api';
-import { CURRENT_USER } from '../constants';
+import { useAuth } from '../context/AuthContext';
 import { formatCurrency, formatNumber } from '../utils/formatters';
 import styles from './FlaggedItemsPage.module.css';
 
@@ -28,6 +28,7 @@ function filtersFromSearch(searchParams, presetStatus) {
 }
 
 export function FlaggedItemsPage({ presetStatus, breadcrumbSuffix = 'Assigned to me' }) {
+  const { user } = useAuth();
   const [searchParams] = useSearchParams();
   const { programs } = usePrograms();
 
@@ -85,7 +86,8 @@ export function FlaggedItemsPage({ presetStatus, breadcrumbSuffix = 'Assigned to
   );
 
   async function handleBulkAction(action) {
-    await Promise.all([...selectedIds].map((id) => reviewFlaggedItem(id, { reviewer: CURRENT_USER.name, action })));
+    // reviewer is derived server-side from the authenticated session.
+    await Promise.all([...selectedIds].map((id) => reviewFlaggedItem(id, { action })));
     setSelectedIds(new Set());
     refetch();
   }
@@ -138,7 +140,7 @@ export function FlaggedItemsPage({ presetStatus, breadcrumbSuffix = 'Assigned to
       <BulkActionBar
         selectedCount={selectedIds.size}
         selectedValue={selectedValue}
-        currentUser={CURRENT_USER.name}
+        currentUser={user?.full_name}
         onApprove={() => handleBulkAction('submitted')}
         onAssign={() => {}}
         onReject={() => handleBulkAction('rejected')}

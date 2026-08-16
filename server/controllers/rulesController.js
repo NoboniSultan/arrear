@@ -37,11 +37,12 @@ async function getRule(req, res) {
 
 async function createRule(req, res) {
   try {
-    const { programId, name, description, sqlQuery, createdBy } = req.body;
+    const { programId, name, description, sqlQuery } = req.body;
     if (!programId || !name || !sqlQuery) {
       return res.status(400).json({ error: 'programId, name, and sqlQuery are required' });
     }
-    const rule = await Rule.create({ programId, name, description, sqlQuery, createdBy });
+    // Attributed to the authenticated session, not a client-supplied name.
+    const rule = await Rule.create({ programId, name, description, sqlQuery, createdBy: req.user.full_name });
     res.status(201).json(rule);
   } catch (err) {
     console.error(err);
@@ -117,9 +118,12 @@ async function submitForReview(req, res) {
 // fails isReadOnlyQuery, no matter what happened earlier in its lifecycle.
 async function reviewRule(req, res) {
   try {
-    const { reviewer, action, notes } = req.body;
-    if (!reviewer || !action) {
-      return res.status(400).json({ error: 'reviewer and action are required' });
+    const { action, notes } = req.body;
+    // Attributed to the authenticated session, not a client-supplied name —
+    // this is exactly the accountability the review workflow exists for.
+    const reviewer = req.user.full_name;
+    if (!action) {
+      return res.status(400).json({ error: 'action is required' });
     }
     if (!REVIEW_ACTIONS.includes(action)) {
       return res.status(400).json({ error: `action must be one of: ${REVIEW_ACTIONS.join(', ')}` });

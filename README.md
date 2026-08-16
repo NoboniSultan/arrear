@@ -34,6 +34,9 @@ submission.
   preview SQL detection logic, but nothing goes live until a second reviewer
   approves it, and every activated version is permanently versioned for
   audit purposes
+- Session-based login for internal team accounts only — there is no public
+  signup; every action (review, note, rule edit/approval) is attributed to
+  the authenticated user, not a client-supplied name
 
 ## Why local
 
@@ -48,24 +51,27 @@ Node.js/Express, PostgreSQL, React (Vite), Ollama.
 
 ```
 server/
-  config/       Postgres connection pool
-  models/       data access layer (flagged items, programs, rules, reviews, ...)
+  config/       Postgres connection pool, session store config
+  models/       data access layer (flagged items, programs, rules, reviews, users, ...)
   controllers/  request handlers and business rules (status transitions, review gates)
   routes/       Express route definitions
-  services/     Ollama integration, SQL validation, rule-preview execution
+  services/     Ollama integration, SQL validation, rule-preview execution, password hashing
+  middleware/   requireAuth, requireRole, login rate limiting
   server.js     entry point
 
 client/
   src/components/  layout shell, reusable UI primitives, and domain-specific components
-  src/pages/       one file per route
+  src/pages/       one file per route (LoginPage included)
+  src/context/     AuthContext — session state and login/logout, via useAuth()
   src/hooks/       data-fetching hooks, one per resource
   src/services/    api.js — every fetch call to the backend lives here
   src/styles/      design tokens (tokens.css)
   src/utils/       formatters and shared helpers
 
 db/
-  schema.sql    CREATE TABLE statements
-  seed.js       synthetic dataset for local dev/testing
+  schema.sql      CREATE TABLE statements
+  seed.js         synthetic app dataset for local dev/testing
+  createUser.js   the only way to create a login — see "Getting started" below
 ```
 
 ## Getting started
@@ -92,16 +98,29 @@ psql -d arrear_dev -f db/schema.sql
 npm run seed
 ```
 
-Re-running this wipes and re-seeds cleanly.
+Re-running this wipes and re-seeds cleanly — it never touches the `users`
+table (see step 4), so reseeding demo data never deletes real logins.
 
-### 4. Start Ollama (for report generation)
+### 4. Create your login accounts
+
+There is no signup page — accounts are created only via this CLI script:
+
+```bash
+node db/createUser.js --email you@example.com --password "a real password" --name "Your Name" --role owner
+```
+
+`--role` is `owner` or `analyst` (defaults to `analyst` if omitted). The rule
+approval step is owner-only. Run it again with a different `--email` for
+each additional teammate.
+
+### 5. Start Ollama (for report generation)
 
 ```bash
 ollama pull llama3.1   # or whatever model you set in OLLAMA_MODEL
 ollama serve
 ```
 
-### 5. Start the backend
+### 6. Start the backend
 
 ```bash
 npm start
@@ -109,7 +128,7 @@ npm start
 
 Runs on `http://localhost:3000`.
 
-### 6. Start the frontend
+### 7. Start the frontend
 
 In a second terminal:
 
@@ -120,6 +139,13 @@ npm run dev
 
 Opens on `http://localhost:5173`. Vite proxies `/api` to the Express server,
 so no CORS setup is needed.
+
+## Future enhancements
+
+Not built yet, deliberately: password reset, email verification, and 2FA.
+With only two known users, if a password needs to change, the owner can
+update it directly via a small update to `db/createUser.js` (or a future
+admin script) rather than building a full self-service flow now.
 
 ## Status
 

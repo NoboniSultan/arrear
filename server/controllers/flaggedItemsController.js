@@ -3,7 +3,6 @@ const ReviewLog = require('../models/reviewLog');
 const InternalNote = require('../models/internalNote');
 
 const VALID_STATUSES = ['new', 'reviewed', 'submitted', 'rejected'];
-const CURRENT_USER = 'M. Reyes';
 
 async function list(req, res) {
   try {
@@ -35,16 +34,19 @@ async function getOne(req, res) {
 async function review(req, res) {
   try {
     const { id } = req.params;
-    const { reviewer, action, notes } = req.body;
+    const { action, notes } = req.body;
 
-    if (!reviewer || !action) {
-      return res.status(400).json({ error: 'reviewer and action are required' });
+    if (!action) {
+      return res.status(400).json({ error: 'action is required' });
     }
 
     const item = await FlaggedItem.getById(id);
     if (!item) return res.status(404).json({ error: 'Flagged item not found' });
 
-    const log = await ReviewLog.create({ flaggedItemId: id, reviewer, action, notes });
+    // Attributed to the authenticated session, not a client-supplied name —
+    // otherwise any caller could claim to be a different reviewer in the
+    // audit trail.
+    const log = await ReviewLog.create({ flaggedItemId: id, reviewer: req.user.full_name, action, notes });
 
     let updatedItem = item;
     if (VALID_STATUSES.includes(action)) {
@@ -61,7 +63,7 @@ async function review(req, res) {
 async function addNote(req, res) {
   try {
     const { id } = req.params;
-    const { note, author } = req.body;
+    const { note } = req.body;
 
     if (!note || !note.trim()) {
       return res.status(400).json({ error: 'note is required' });
@@ -70,7 +72,7 @@ async function addNote(req, res) {
     const item = await FlaggedItem.getById(id);
     if (!item) return res.status(404).json({ error: 'Flagged item not found' });
 
-    const created = await InternalNote.create({ flaggedItemId: id, author: author || CURRENT_USER, note: note.trim() });
+    const created = await InternalNote.create({ flaggedItemId: id, author: req.user.full_name, note: note.trim() });
     res.status(201).json(created);
   } catch (err) {
     console.error(err);

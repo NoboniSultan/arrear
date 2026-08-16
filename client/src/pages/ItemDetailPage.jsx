@@ -12,7 +12,6 @@ import { AuditTrail } from '../components/domain/AuditTrail';
 import { ItemDispositionBar } from '../components/domain/ItemDispositionBar';
 import { useFlaggedItem } from '../hooks/useFlaggedItem';
 import { reviewFlaggedItem } from '../services/api';
-import { CURRENT_USER } from '../constants';
 import { formatCurrency, formatDateLong, formatDateISO } from '../utils/formatters';
 import styles from './ItemDetailPage.module.css';
 
@@ -25,7 +24,8 @@ export function ItemDetailPage() {
   async function disposition(action, notes) {
     setSubmitting(true);
     try {
-      await reviewFlaggedItem(id, { reviewer: CURRENT_USER.name, action, notes });
+      // reviewer is derived server-side from the authenticated session.
+      await reviewFlaggedItem(id, { action, notes });
       refetch();
     } finally {
       setSubmitting(false);

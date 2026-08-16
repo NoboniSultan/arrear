@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { reviewRule } from '../../services/api';
-import { CURRENT_USER } from '../../constants';
+import { useAuth } from '../../context/AuthContext';
 import { formatDateLong } from '../../utils/formatters';
 import styles from './RuleReviewPanel.module.css';
 
@@ -13,12 +13,14 @@ const ACTION_LABELS = {
 };
 
 export function RuleReviewPanel({ rule, reviews, onReviewed }) {
+  const { user } = useAuth();
   const [action, setAction] = useState('approved');
   const [notes, setNotes] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
-  const canReview = rule.status === 'in_review';
+  const isInReview = rule.status === 'in_review';
+  const isOwner = user?.role === 'owner';
   const notesRequired = action !== 'approved';
 
   async function handleSubmit() {
@@ -29,7 +31,9 @@ export function RuleReviewPanel({ rule, reviews, onReviewed }) {
     setSubmitting(true);
     setError(null);
     try {
-      await reviewRule(rule.id, { reviewer: CURRENT_USER.name, action, notes: notes.trim() || undefined });
+      // reviewer is derived server-side from the authenticated session, not
+      // sent from here — see server/controllers/rulesController.js.
+      await reviewRule(rule.id, { action, notes: notes.trim() || undefined });
       setNotes('');
       onReviewed && onReviewed();
     } catch (err) {
@@ -55,7 +59,11 @@ export function RuleReviewPanel({ rule, reviews, onReviewed }) {
         {reviews.length === 0 && <p className={styles.empty}>No reviews yet.</p>}
       </div>
 
-      {canReview && (
+      {isInReview && !isOwner && (
+        <p className={styles.restricted}>Only an owner can approve, request changes, or reject this rule.</p>
+      )}
+
+      {isInReview && isOwner && (
         <div className={styles.form}>
           <div className={`mono-label ${styles.formLabel}`}>Record a review</div>
           <select className={styles.select} value={action} onChange={(e) => setAction(e.target.value)}>

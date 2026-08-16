@@ -6,6 +6,11 @@
 async function request(path, options = {}) {
   const res = await fetch(path, {
     headers: { 'Content-Type': 'application/json' },
+    // The backend uses cookie-based sessions (see server/config/session.js)
+    // rather than a bearer token, so every request must send credentials —
+    // otherwise the session cookie never reaches the server and every
+    // protected route looks unauthenticated.
+    credentials: 'include',
     ...options,
   });
 
@@ -34,6 +39,21 @@ function toQueryString(params = {}) {
   return qs ? `?${qs}` : '';
 }
 
+export function login(email, password) {
+  return request('/api/auth/login', {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+  });
+}
+
+export function logout() {
+  return request('/api/auth/logout', { method: 'POST' });
+}
+
+export function fetchCurrentUser() {
+  return request('/api/auth/me');
+}
+
 export function fetchFlaggedItems(params) {
   return request(`/api/flagged-items${toQueryString(params)}`);
 }
@@ -42,17 +62,20 @@ export function fetchFlaggedItem(id) {
   return request(`/api/flagged-items/${id}`);
 }
 
-export function reviewFlaggedItem(id, { reviewer, action, notes }) {
+// reviewer is derived server-side from the authenticated session — never
+// sent from here (see server/controllers/flaggedItemsController.js).
+export function reviewFlaggedItem(id, { action, notes }) {
   return request(`/api/flagged-items/${id}/review`, {
     method: 'POST',
-    body: JSON.stringify({ reviewer, action, notes }),
+    body: JSON.stringify({ action, notes }),
   });
 }
 
-export function addNote(id, { note, author }) {
+// author is derived server-side from the authenticated session.
+export function addNote(id, { note }) {
   return request(`/api/flagged-items/${id}/notes`, {
     method: 'POST',
-    body: JSON.stringify({ note, author }),
+    body: JSON.stringify({ note }),
   });
 }
 
@@ -94,10 +117,11 @@ export function fetchRule(id) {
   return request(`/api/rules/${id}`);
 }
 
-export function createRule({ programId, name, description, sqlQuery, createdBy }) {
+// createdBy is derived server-side from the authenticated session.
+export function createRule({ programId, name, description, sqlQuery }) {
   return request('/api/rules', {
     method: 'POST',
-    body: JSON.stringify({ programId, name, description, sqlQuery, createdBy }),
+    body: JSON.stringify({ programId, name, description, sqlQuery }),
   });
 }
 
@@ -119,10 +143,11 @@ export function submitRuleForReview(id) {
   return request(`/api/rules/${id}/submit-for-review`, { method: 'POST' });
 }
 
-export function reviewRule(id, { reviewer, action, notes }) {
+// reviewer is derived server-side from the authenticated session.
+export function reviewRule(id, { action, notes }) {
   return request(`/api/rules/${id}/review`, {
     method: 'POST',
-    body: JSON.stringify({ reviewer, action, notes }),
+    body: JSON.stringify({ action, notes }),
   });
 }
 
