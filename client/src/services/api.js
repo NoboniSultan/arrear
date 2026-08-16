@@ -1,10 +1,13 @@
 // All fetch calls to the Express backend live here — no component should
-// call fetch() directly. Vite's dev server proxies /api to the Express app
-// (see vite.config.js), so plain relative paths work in both dev and a
-// built/served bundle.
+// call fetch() directly. In local dev, VITE_API_URL is unset, requests stay
+// relative, and Vite's dev server proxies /api to the Express app (see
+// vite.config.js). In production (Cloudflare Pages), VITE_API_URL points at
+// the deployed Render backend, since frontend and backend are no longer
+// same-origin — see DEPLOY.md.
+const API_BASE_URL = import.meta.env.VITE_API_URL || '';
 
 async function request(path, options = {}) {
-  const res = await fetch(path, {
+  const res = await fetch(`${API_BASE_URL}${path}`, {
     headers: { 'Content-Type': 'application/json' },
     // The backend uses cookie-based sessions (see server/config/session.js)
     // rather than a bearer token, so every request must send credentials —

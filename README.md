@@ -140,6 +140,16 @@ npm run dev
 Opens on `http://localhost:5173`. Vite proxies `/api` to the Express server,
 so no CORS setup is needed.
 
+## Deployment
+
+**Live demo:** not deployed yet — this line will be updated with the real
+`.pages.dev` URL once we've gone through the steps below.
+
+For hosting this for internal/demo viewing (free-tier only — Cloudflare
+Pages + Render + Neon), see [DEPLOY.md](DEPLOY.md). **Read its "Demo
+Deployment vs. Production Deployment" section first** — this deployment
+path must never be used once real patient data is involved.
+
 ## Future enhancements
 
 Not built yet, deliberately: password reset, email verification, and 2FA.

@@ -2,7 +2,7 @@
 // framework — just fetch. Requires Node 18+ (global fetch) and a running
 // `ollama serve` with OLLAMA_MODEL already pulled.
 
-const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL || 'http://localhost:11434';
+const OLLAMA_BASE_URL = process.env.OLLAMA_URL || 'http://localhost:11434';
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'llama3.1';
 
 async function generateText(prompt, { model = OLLAMA_MODEL } = {}) {

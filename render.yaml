@@ -1,0 +1,33 @@
+# Render Blueprint for Arrear's backend — free tier only, for the
+# synthetic-data demo phase. See DEPLOY.md for full setup steps and the
+# demo-vs-production distinction (read that before deploying anything here).
+#
+# Deliberately does NOT provision Render's own Postgres. Arrear uses Neon
+# instead (see DEPLOY.md Part 2): Render's free Postgres expires and is
+# deleted 30 days after creation, while Neon's free tier has no expiry.
+services:
+  - name: arrear-backend
+    type: web
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      # Neon connection string — see DEPLOY.md Part 2 for how to get this.
+      - key: DATABASE_URL
+        sync: false
+      # Render generates a random value for you at Blueprint creation time.
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: NODE_ENV
+        value: production
+      # Address for reaching Ollama on your Mac over Tailscale — read
+      # DEPLOY.md Part 5 first; the free tier has real limitations here.
+      - key: OLLAMA_URL
+        sync: false
+      # The exact Cloudflare Pages origin (e.g. https://arrear.pages.dev),
+      # no trailing slash. Used for CORS — must be an exact origin, never a
+      # wildcard, since this API uses credentialed (cookie) requests.
+      - key: ALLOWED_ORIGIN
+        sync: false

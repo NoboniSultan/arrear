@@ -25,7 +25,12 @@ const sessionMiddleware = session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    sameSite: 'lax',
+    // 'none' in production: the Cloudflare Pages frontend and the Render
+    // backend are on different domains, and a cross-site cookie requires
+    // SameSite=None (which browsers only honor when Secure is also true —
+    // isProduction guarantees that below). 'lax' in local dev, where
+    // frontend and backend are same-origin via the Vite proxy anyway.
+    sameSite: isProduction ? 'none' : 'lax',
     // false in local dev so the cookie still works over plain http;
     // true in production, where the app is expected to be served over TLS.
     secure: isProduction,

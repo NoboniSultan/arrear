@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { TopBar } from '../components/layout/TopBar';
 import { Badge } from '../components/ui/Badge';
 import { FlagReasonPanel } from '../components/domain/FlagReasonPanel';
+import { ReportGenerator } from '../components/domain/ReportGenerator';
 import { CriteriaChecklist } from '../components/domain/CriteriaChecklist';
 import { CodingChangeCompare } from '../components/domain/CodingChangeCompare';
 import { InternalNotes } from '../components/domain/InternalNotes';
@@ -75,6 +76,7 @@ export function ItemDetailPage() {
         <div className={styles.mainGrid}>
           <div className={styles.mainColumn}>
             <FlagReasonPanel item={item} />
+            <ReportGenerator flaggedItemId={item.id} />
             <CriteriaChecklist criteria={item.criteriaChecklist} />
             <CodingChangeCompare item={item} />
             <InternalNotes flaggedItemId={item.id} notes={item.internalNotes} onNoteAdded={refetch} />

@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hint {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.error {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+
+.error .mono-label {
+  font-size: 11px;
+  color: #b3261e;
+  margin-bottom: 6px;
+}
+
+.error p {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.reportText {
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+}
